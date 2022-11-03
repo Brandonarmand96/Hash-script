@@ -9,13 +9,13 @@ This scripts takes in a Hng9 zuri csv and adds a hash field, creates a chip-0000
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/Brandonarmand96/Hash-script
 ```
 
 Go to the project directory
 
 ```bash
-  cd hash-scripts
+  cd hash-script
 ```
 
 Install dependencies
