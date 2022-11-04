@@ -1,5 +1,4 @@
-//
-//
+
 const csvtojson = require('csvtojson');
 const ObjectsToCsv = require('objects-to-csv');
 const crypto = require('crypto');
@@ -14,10 +13,10 @@ function chipConverter(json) {
   json.map((i) => {
     //checking if the row is only team name or valid
     //if it is valid new json is created
-    if (parseInt(i["Series Number"]) !== parseInt(i["Series Number"])) {
-      team = i["Series Number"];
-    } else {
-      const attributeArr = i["Attributes"].split(", ")
+    if (i["TEAM NAMES"] !== "") {
+      team = i["TEAM NAMES"];
+    }
+      const attributeArr = i["Attributes"].split("; ")
       const attributesPairArr = []
       attributeArr.map((i) => {
         attributesPairArr.push(i.split(": "))
@@ -41,7 +40,7 @@ function chipConverter(json) {
         "description": i["Description"],
         "minting_tool": team,
         "sensitive_content": false,
-        "series_number": i["Series Number"],
+        "series_number": parseInt(i["Series Number"]),
         "series_total": json.length,
         "attributes": attributesObjArr,
         "collection": {
@@ -69,7 +68,7 @@ function chipConverter(json) {
         }
       })
 
-    }
+    
   })
   //saving updated json with hash to csv
   new ObjectsToCsv(json).toDisk('./csv/output.csv');
@@ -81,10 +80,10 @@ const csvfilepath = prompt("Please paste the complete filepath to your csv file 
 csvtojson().fromFile(csvfilepath).then((json) => {
   chipConverter(json)
 
-  fs.writeFileSync('output.json', JSON.stringify(json), "utf-8", (err) => {
-    if (err) {
-      console.log(err);
-    }
-  })
+  // fs.writeFileSync('output.json', JSON.stringify(json), "utf-8", (err) => {
+  //   if (err) {
+  //     console.log(err);
+  //   }
+  // })
 
 })
